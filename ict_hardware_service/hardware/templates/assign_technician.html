@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Assign Technician{% endblock %}
+{% block content %}
+<section class="card narrow">
+  <h2>Assign Technician for Request #{{ req.id }}</h2>
+
+  <p><strong>Category:</strong> {{ req.category }}</p>
+  <p><strong>Description:</strong> {{ req.description }}</p>
+  <p><strong>Status:</strong> <span class="status {{ req.status|lower|slugify }}">{{ req.status }}</span></p>
+
+  <form method="post">
+    {% csrf_token %}
+    <label for="technician">Select Technician</label>
+    <select name="technician" id="technician" required>
+      <option value="">-- Choose Technician --</option>
+      {% for tech in technicians %}
+        <option value="{{ tech.id }}">{{ tech }}</option>
+      {% endfor %}
+    </select>
+
+
+    <div class="form-actions">
+      <button class="btn" type="submit">Assign Technician</button>
+      <a href="{% url 'ict_officer_dashboard' %}" class="btn ghost">Cancel</a>
+    </div>
+  </form>
+</section>
+{% endblock %}

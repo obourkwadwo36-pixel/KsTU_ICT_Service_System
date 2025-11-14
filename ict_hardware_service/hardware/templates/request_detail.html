@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Request Details{% endblock %}
+
+{% block content %}
+<section class="card">
+  <h2>Hardware Service Request Details</h2>
+
+  <p><strong>Request ID:</strong> {{ req.id }}</p>
+  <p><strong>Requested By:</strong> {{ req.staff.username }}</p>
+  <p><strong>Device Type:</strong> {{ req.category }}</p>
+  <p><strong>Description:</strong> {{ req.description }}</p>
+  <p><strong>Date Requested:</strong> {{ req.date_requested }}</p>
+  <p><strong>Status:</strong> {{ req.status }}</p>
+
+  {% if req.assigned_to %}
+      <p><strong>Assigned To:</strong> {{ req.assigned_to.user.username }}</p>
+  {% else %}
+      <p><strong>Assigned To:</strong> Not Assigned</p>
+  {% endif %}
+
+  <div class="form-actions">
+    <a href="{% url back_url %}" class="btn ghost">← Back to Dashboard</a>
+  </div>
+</section>
+
+<footer>© KsTU ICT Hardware Service System</footer>
+{% endblock %}

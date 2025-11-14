@@ -1,0 +1,83 @@
+/* Simple clean layout — tweak colors to KsTU theme */
+:root{
+  --brand:#7a1f2b;
+  --accent:#d4a017;
+  --muted:#666;
+  --bg:#f7f7f8;
+  --card:#ffffff;
+}
+
+*{box-sizing:border-box;font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;}
+body{margin:0;background:var(--bg);color:#222}
+.container{max-width:1000px;margin:18px auto;padding:0 16px}
+
+.site-header{background:var(--brand);color:white;padding:12px 0}
+.header-inner{display:flex;justify-content:space-between;align-items:center;max-width:1000px;margin:0 auto;padding:0 16px}
+.logo a{color:white;text-decoration:none;font-weight:700;font-size:1.05rem}
+.main-nav .nav-btn{color:white;margin-left:12px;text-decoration:none;background:transparent;padding:6px 10px;border-radius:6px}
+.user-info{margin-right:10px;color:#ffd}
+
+.site-footer{padding:14px 0;text-align:center;color:var(--muted);font-size:.9rem;margin-top:28px}
+
+.card{background:var(--card);padding:16px;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,0.06);margin-bottom:16px}
+.auth-card{max-width:420px;margin:30px auto;padding:24px;text-align:left}
+.narrow{max-width:720px;margin:16px auto}
+
+.grid.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:800px){.grid.two-col{grid-template-columns:1fr}}
+
+h2,h3{margin:0 0 12px 0}
+label{display:block;margin:8px 0 6px;font-weight:600}
+input[type="text"],input[type="password"],select,textarea{width:100%;padding:8px;border:1px solid #e1e1e1;border-radius:6px}
+textarea{min-height:90px;resize:vertical}
+
+.btn{display:inline-block;background:var(--brand);color:white;padding:8px 12px;border-radius:6px;text-decoration:none;border:none;cursor:pointer}
+.btn.ghost{background:white;color:var(--brand);border:1px solid var(--brand)}
+.form-actions{margin-top:12px}
+
+.table{width:100%;border-collapse:collapse;margin-top:10px}
+.table th,.table td{padding:8px;border-bottom:1px solid #f1f1f1;text-align:left;font-size:.95rem}
+.toolbar{margin-bottom:8px}
+
+.status {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: .85rem;
+  font-weight: 600;
+  color: #fff;
+  text-transform: capitalize;
+}
+
+/* KsTU Color Theme */
+.status.pending {
+  background: #d4a017;   /* Gold */
+  color: #222;           /* Dark text for contrast */
+}
+
+.status.assigned {
+  background: #7a1f2b;   /* KsTU Maroon */
+}
+
+.status.in-progress {
+  background: #9b59b6;   /* Bright violet for clarity */
+  color: #1c1a88;
+}
+
+.status.completed {
+  background: #27ae60;   /* Success green */
+}
+
+/* Optional: Make "In Progress" pulse softly to attract attention */
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(155, 89, 182, 0.6); }
+  70% { box-shadow: 0 0 0 8px rgba(155, 89, 182, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(155, 89, 182, 0); }
+}
+
+.status.in-progress {
+  animation: pulse 2s infinite;
+}
+
+
+.alert{background:#fff3f3;border:1px solid #ffd5d5;padding:8px;border-radius:6px;color:#b00000}

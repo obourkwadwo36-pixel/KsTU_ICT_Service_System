@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block title %}Technician Dashboard{% endblock %}
+
+{% block content %}
+<section class="card">
+  <div class="toolbar" style="display: flex; justify-content: space-between; align-items: center;">
+    <h2>Assigned Service Requests</h2>
+    <a href="{% url 'technician_job_history' %}" class="btn btn-ghost">View Job History</a>
+  </div>
+
+  <table id="requests-table" class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Staff</th>
+        <th>Category</th>
+        <th>Description</th>
+        <th>Status</th>
+        <th>Update Job</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for req in requests %}
+      <tr>
+        <td>{{ req.id }}</td>
+        <td>{{ req.staff.get_full_name|default:req.staff.username }}</td>
+        <td>{{ req.category }}</td>
+        <td>{{ req.description }}</td>
+        <td>
+          <span class="status {{ req.status|slugify|lower }}">
+            {{ req.status }}
+          </span>
+        </td>
+        <td>
+          <form method="post" style="display: flex; flex-direction: column;">
+            {% csrf_token %}
+            <input type="hidden" name="request_id" value="{{ req.id }}">
+            <textarea name="update_text" placeholder="Enter job update..." required></textarea>
+            <select name="status" required>
+              <option value="">-- Update Status --</option>
+              <option value="In Progress" {% if req.status == "In Progress" %}selected{% endif %}>In Progress</option>
+              <option value="Completed" {% if req.status == "Completed" %}selected{% endif %}>Completed</option>
+            </select>
+            <button type="submit" class="btn btn-primary btn-sm" style="margin-top: 5px;">Submit Update</button>
+          </form>
+        </td>
+      </tr>
+      {% empty %}
+      <tr><td colspan="6">No service requests assigned yet.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+
+<script>
+setInterval(() => {
+  fetch(window.location.href, { headers: { 'X-Requested-With': 'XMLHttpRequest' } })
+    .then(res => res.text())
+    .then(html => {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, 'text/html');
+      const newBody = doc.querySelector('#requests-table tbody');
+      document.querySelector('#requests-table tbody').innerHTML = newBody.innerHTML;
+    })
+    .catch(err => console.error('Refresh error:', err));
+}, 10000000000);
+</script>
+{% endblock %}

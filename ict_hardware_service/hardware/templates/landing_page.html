@@ -1,0 +1,91 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome | KsTU ICT Hardware Service System</title>
+    <style>
+        body {
+            font-family: "Segoe UI", sans-serif;
+            background: linear-gradient(to right, #00416A, #E4E5E6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+            background-color: white;
+            padding: 50px 60px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 0.8s ease;
+            width: 450px;
+        }
+
+        h1 {
+            color: #00416A;
+            font-size: 26px;
+            margin-bottom: 15px;
+        }
+
+        p {
+            color: #444;
+            font-size: 15px;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            margin: 8px;
+            border: none;
+            border-radius: 6px;
+            text-decoration: none;
+            color: white;
+            background-color: #00416A;
+            font-weight: bold;
+            transition: all 0.3s;
+            font-size: 15px;
+        }
+
+        .btn:hover {
+            background-color: #0167A3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 65, 106, 0.3);
+        }
+
+        footer {
+            margin-top: 30px;
+            color: #666;
+            font-size: 13px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to KsTU ICT Hardware Service</h1>
+        <p>Access the ICT maintenance and support system using your institutional email.<br>
+           Example: <strong>account@kstu.edu.gh</strong></p>
+        <a href="{% url 'login' %}" class="btn">Login</a>
+        <a href="{% url 'register' %}" class="btn">Register</a>
+        <footer>© {{ now|date:"Y" }} Kumasi Technical University | ICT Directorate</footer>
+    </div>
+</body>
+</html>
+

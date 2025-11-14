@@ -1,0 +1,78 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>{% block title %}KsTU ICT Hardware Service{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="logo">
+        <a href="{% url 'dashboard' %}">KsTU ICT Hardware Service</a>
+      </div>
+      <nav class="main-nav">
+        {% if user.is_authenticated %}
+          <span class="user-info">Signed in as <strong>{{ user.get_full_name|default:user.username }}</strong></span>
+          <a class="nav-btn" href="{% url 'dashboard' %}">Dashboard</a>
+          <a class="nav-btn" href="{% url 'logout' %}">Logout</a>
+        {% else %}
+          <a class="nav-btn" href="{% url 'login' %}">Login</a>
+        {% endif %}
+      </nav>
+    </div>
+  </header>
+
+<main class="container">
+  {% if messages %}
+  <div id="message-container">
+    {% for message in messages %}
+      <div class="alert 
+        {% if message.tags == 'success' %}alert-success{% elif message.tags == 'error' %}alert-error
+        {% elif message.tags == 'warning' %}alert-warning{% else %}alert-info{% endif %}">
+        {{ message }}
+      </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% block content %}{% endblock %}
+</main>
+
+<style>
+  #message-container {
+    margin: 20px auto;
+    max-width: 1000px;
+    text-align: center;
+  }
+  .alert {
+    padding: 12px 18px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    color: #fff;
+    font-weight: bold;
+    opacity: 0;
+    transform: translateY(-10px);
+    animation: fadeInOut 4s ease forwards;
+  }
+  .alert-success { background-color: #4caf50; } /* green */
+  .alert-error { background-color: #f44336; }   /* red */
+  .alert-warning { background-color: #ff9800; } /* orange */
+  .alert-info { background-color: #2196f3; }    /* blue */
+
+  @keyframes fadeInOut {
+    0% { opacity: 0; transform: translateY(-10px); }
+    10%, 90% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-10px); }
+  }
+</style>
+
+  <footer class="site-footer">
+    <div class="container">
+      <small>© {{ now.year }} Kumasi Technical University — ICT Directorate</small>
+    </div>
+  </footer>
+</body>
+</html>
