@@ -1,1 +1,1 @@
-web: gunicorn ict_hardware_service.ict_hardware_service.wsgi 
+web: gunicorn ict_hardware_service.ict_hardware_service.wsgi:application
