@@ -1,1 +1,1 @@
-web: gunicorn KsTU_ICT_Service_System.wsgi
+web: gunicorn ict_hardware_service.wsgi
