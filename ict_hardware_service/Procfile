@@ -1,1 +1,0 @@
-web: gunicorn KsTU_ICT_Service_System.wsgi
